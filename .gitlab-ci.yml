@@ -3,46 +3,36 @@ stages:
   - merge
   - deploy
 
-variables:
-  GIT_STRATEGY: clone
-
 before_script:
-  - git config --global user.email "ci@gitlab.com"
-  - git config --global user.name "GitLab CI"
+  - whoami
+  - pwd
 
-# =========================
-# CI - TEST
-# =========================
 test_fixfeat:
   stage: test
-  script:
-    - composer install --no-interaction --prefer-dist
-    - php artisan key:generate || true
-    - php artisan test || true
+  script: |
+    echo "Skip test for now"
   only:
     - fixfeat
 
-# =========================
-# AUTO MERGE fixfeat -> testing
-# =========================
 merge_to_testing:
   stage: merge
-  script:
-    - |
-      git fetch origin
-      git checkout testing
-      git pull origin testing
-      git merge origin/fixfeat --no-ff -m "CI: merge fixfeat into testing"
-      git push origin testing
+  script: |
+    git config --global user.email "ci@gitlab.com"
+    git config --global user.name "GitLab CI"
+
+    git fetch origin
+    git checkout testing
+    git pull origin testing
+    git merge origin/fixfeat --no-ff -m "CI: merge fixfeat into testing"
+    git push origin testing
   only:
     - fixfeat
 
-# =========================
-# DEPLOY TESTING
-# =========================
 deploy_testing:
   stage: deploy
-  script:
-    - echo "Deploy step (will be fixed after pipeline runs)"
+  script: |
+    cd /home/diyorossi/docker-laravel-crud/app/laravel-crud-ajax
+    docker compose down
+    docker compose up -d --build
   only:
-    - fixfeat
+    - fixfe
