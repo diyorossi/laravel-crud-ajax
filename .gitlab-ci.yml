@@ -31,7 +31,8 @@ merge_to_testing:
 deploy_testing:
   stage: deploy
   script: |
-    cd /home/diyorossi/docker-laravel-crud/app/laravel-crud-ajax
+    pwd
+    ls -la
     docker compose down
     docker compose up -d --build
   only:
