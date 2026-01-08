@@ -7,41 +7,32 @@ before_script:
   - whoami
   - pwd
 
-# =========================
-# TEST FEATURE
-# =========================
 test_fixfeat:
   stage: test
-  script:
-    - echo "Skip test for now"
+  script: |
+    echo "Skip test for now"
   only:
     - fixfeat
 
-# =========================
-# MERGE KE TESTING
-# =========================
 merge_to_testing:
   stage: merge
-  script:
-    - git config --global user.email "ci@gitlab.com"
-    - git config --global user.name "GitLab CI"
+  script: |
+    git config --global user.email "ci@gitlab.com"
+    git config --global user.name "GitLab CI"
 
-    - git fetch origin
-    - git checkout testing
-    - git pull origin testing
-    - git merge "$CI_COMMIT_SHA" --no-ff -m "CI: merge fixfeat into testing"
-    - git push origin testing
+    git fetch origin
+    git checkout testing
+    git pull origin testing
+    git merge "$CI_COMMIT_SHA" --no-ff -m "CI: merge fixfeat into testing"
+    git push origin testing
   only:
     - fixfeat
 
-# =========================
-# DEPLOY KE TESTING
-# =========================
 deploy_testing:
   stage: deploy
-  script:
-    - cd /home/diyorossi/docker-laravel-crud/app/laravel-crud-ajax
-    - docker compose down
-    - docker compose up -d --build
+  script: |
+    cd /home/diyorossi/docker-laravel-crud/app/laravel-crud-ajax
+    docker compose down
+    docker compose up -d --build
   only:
     - testing
