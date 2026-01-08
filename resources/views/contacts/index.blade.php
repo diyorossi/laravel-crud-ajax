@@ -83,7 +83,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0"><i class="fas fa-address-book"></i> Manajemen Data Kontak</h3>
                     <button type="button" class="btn btn-primary" id="btnAddContact">
-                        <i class="fas fa-plus"></i> Tambah Kontakz
+                        <i class="fas fa-plus"></i> Tambah Kontakzzz
                     </button>
                 </div>
             </div>
