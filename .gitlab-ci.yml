@@ -23,7 +23,7 @@ merge_to_testing:
     git fetch origin
     git checkout testing
     git pull origin testing
-    git merge origin/fixfeat --no-ff -m "CI: merge fixfeat into testing"
+    git merge "$CI_COMMIT_SHA" --no-ff -m "CI: merge fixfeat into testing"
     git push origin testing
   only:
     - fixfeat
@@ -35,4 +35,4 @@ deploy_testing:
     docker compose down
     docker compose up -d --build
   only:
-    - fixfe
+    - testing
