@@ -15,8 +15,6 @@ before_script:
 # =========================
 test_fixfeat:
   stage: test
-  tags:
-    - docker
   script:
     - composer install --no-interaction --prefer-dist
     - php artisan key:generate || true
@@ -29,14 +27,13 @@ test_fixfeat:
 # =========================
 merge_to_testing:
   stage: merge
-  tags:
-    - docker
   script:
-    - git fetch origin
-    - git checkout testing
-    - git pull origin testing
-    - git merge origin/fixfeat --no-ff -m "CI: merge fixfeat into testing"
-    - git push origin testing
+    - |
+      git fetch origin
+      git checkout testing
+      git pull origin testing
+      git merge origin/fixfeat --no-ff -m "CI: merge fixfeat into testing"
+      git push origin testing
   only:
     - fixfeat
 
@@ -45,12 +42,7 @@ merge_to_testing:
 # =========================
 deploy_testing:
   stage: deploy
-  tags:
-    - docker
   script:
-    - cd /home/diyorossi/docker-laravel-crud/app/laravel-crud-ajax
-    - git pull origin testing
-    - docker compose down
-    - docker compose up -d --build
+    - echo "Deploy step (will be fixed after pipeline runs)"
   only:
     - fixfeat
