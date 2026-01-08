@@ -32,11 +32,12 @@ merge_to_testing:
   tags:
     - docker
   script:
-    - git fetch origin
-    - git checkout testing
-    - git pull origin testing
-    - git merge origin/fixfeat --no-ff -m "CI: merge fixfeat into testing"
-    - git push origin testing
+    - |
+      git fetch origin
+      git checkout testing
+      git pull origin testing
+      git merge origin/fixfeat --no-ff -m "CI: merge fixfeat into testing"
+      git push origin testing
   only:
     - fixfeat
 
