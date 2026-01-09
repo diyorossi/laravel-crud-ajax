@@ -33,7 +33,6 @@ deploy_testing:
   script: |
     pwd
     ls -la
-    docker compose down
-    docker compose up -d --build
+    docker --version
   only:
     - testing
