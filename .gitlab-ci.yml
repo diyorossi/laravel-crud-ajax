@@ -7,6 +7,9 @@ before_script:
   - whoami
   - pwd
 
+# =========================
+# TEST STAGE
+# =========================
 test_fixfeat:
   stage: test
   script: |
@@ -14,6 +17,9 @@ test_fixfeat:
   only:
     - fixfeat
 
+# =========================
+# MERGE STAGE
+# =========================
 merge_to_testing:
   stage: merge
   script: |
@@ -27,7 +33,10 @@ merge_to_testing:
     git push origin testing
   only:
     - fixfeat
-
+    
+# =========================
+# DEPLOY STAGE (TESTING)
+# =========================
 deploy_testing:
   stage: deploy
   only:
@@ -35,7 +44,10 @@ deploy_testing:
   needs:
     - merge_to_testing
   script: |
-    cd /home/diyorossi/docker-laravel-crud/app/laravel-crud-ajax
-    git fetch origin
-    git checkout testing
-    git pull origin testing
+    ssh -o StrictHostKeyChecking=no -p 2223 root@172.17.92.192 << 'EOF'
+      set -e
+      cd /laravel-crud-ajax
+      git pull origin testing
+      docker compose down
+      docker compose up -d --build
+    EOF
