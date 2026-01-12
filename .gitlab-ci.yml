@@ -35,7 +35,6 @@ deploy_testing:
   needs:
     - merge_to_testing
   script: |
+    cd /home/diyorossi/docker-laravel-crud/app/laravel-crud-ajax
     pwd
-    git fetch origin
-    git checkout testing
-    git pull origin testing
+    docker --version
