@@ -30,9 +30,12 @@ merge_to_testing:
 
 deploy_testing:
   stage: deploy
+  only:
+    - fixfeat
+  needs:
+    - merge_to_testing
   script: |
     pwd
-    ls -la
-    docker --version
-  only:
-    - testing
+    git fetch origin
+    git checkout testing
+    git pull origin testing
