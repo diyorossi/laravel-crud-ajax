@@ -48,6 +48,4 @@ deploy_testing:
       set -e
       cd /laravel-crud-ajax
       git pull origin testing
-      docker compose down
-      docker compose up -d --build
     EOF
