@@ -82,8 +82,8 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0"><i class="fas fa-address-book"></i> Manajemen Data Kontak</h3>
-                    <button type="button" class="btn btn-success" id="btnAddContact">
-                        <i class="fas fa-plus"></i> Tambah Kontak
+                    <button type="button" class="btn btn-primary" id="btnAddContact">
+                        <i class="fas fa-plus"></i> Add Kontak
                     </button>
                 </div>
             </div>
